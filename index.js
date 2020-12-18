@@ -30,7 +30,7 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
   }`;
 
  const port=process.env.PORT || 3000;
-//  app.use(bodyParser.json());
+ app.use(express.json());
  app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-cache');
@@ -44,7 +44,7 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
         const hgeEndpoint = process.env.HASURA_GQL_URL;
         
         try{
-          const {event} =JSON.parse(req.body);
+          const {event} =req.body;
           const {op, data} =event;
           let {created_by,created_at,modified_at,modified_by,deleted,properties,id,log_remarks,start_date,end_date}=data.new;
         let payload={
