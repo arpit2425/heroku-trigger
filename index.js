@@ -42,8 +42,10 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
     
         const adminSecret = process.env.HASURA_ADMIN_SECRET;
         const hgeEndpoint = process.env.HASURA_GQL_URL;
+        
         try{
-          const {op, data} =JSON.parse(req.body.event);
+          const {event} =JSON.parse(req.body);
+          const {op, data} =event;
           let {created_by,created_at,modified_at,modified_by,deleted,properties,id,log_remarks,start_date,end_date}=data.new;
         let payload={
           created_by,
