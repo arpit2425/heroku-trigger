@@ -30,13 +30,13 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
  app.use('/',router);
  const port=process.env.PORT || 3000;
 
-    router.post('/tracker-trigger',async(event,res) => {
+    router.post('/tracker-trigger',async(req,res) => {
         
         const adminSecret = process.env.HASURA_ADMIN_SECRET;
         const hgeEndpoint = process.env.HASURA_GQL_URL;
-        console.log(event.body);
+        console.log(req);
         try{
-          const { event: {op, data}, table: {name, schema} } = event.body;
+          const { event: {op, data}, table: {name, schema} } = req.body;
           let {created_by,created_at,modified_at,modified_by,deleted,properties,id,log_remarks,start_date,end_date}=data.new;
         let payload={
           created_by,
