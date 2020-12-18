@@ -2,6 +2,7 @@ const express=require('express');
 const app=express();
 const axios = require('axios');
 const router = express.Router();
+const bodyParser = require('body-parser');
 const moment=require('moment');
 const sub_package_query=`query vas_sub_packages($id: uuid){
     vas_sub_packages(where:{id:{_eq:$id}}){
@@ -29,6 +30,7 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
   }`;
 
  const port=process.env.PORT || 3000;
+ app.use(bodyParser.json());
  app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-cache');
@@ -44,7 +46,7 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
         
       
         try{
-          const { event: {op, data}, table: {name, schema} } = JSON.parse(req.body);
+          const { event: {op, data}, table: {name, schema} } = req.body;
           let {created_by,created_at,modified_at,modified_by,deleted,properties,id,log_remarks,start_date,end_date}=data.new;
         let payload={
           created_by,
