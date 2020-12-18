@@ -40,7 +40,7 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
         
         const adminSecret = process.env.HASURA_ADMIN_SECRET;
         const hgeEndpoint = process.env.HASURA_GQL_URL;
-        console.log(JSON.parse(req.body));
+        console.log(JSON.parse(req));
         try{
           const { event: {op, data}, table: {name, schema} } = JSON.parse(req.body);
           let {created_by,created_at,modified_at,modified_by,deleted,properties,id,log_remarks,start_date,end_date}=data.new;
