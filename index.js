@@ -37,9 +37,11 @@ const sub_package_query=`query vas_sub_packages($id: uuid){
 
 
  app.post('/tracker-trigger',async(req, res) => {
-    console.log(req.body);
+    
         const adminSecret = process.env.HASURA_ADMIN_SECRET;
         const hgeEndpoint = process.env.HASURA_GQL_URL;
+        console.log(adminSecret);
+        console.log(hgeEndpoint);
       
         try{
           const { event: {op, data}, table: {name, schema} } = JSON.parse(req.body.payload);
